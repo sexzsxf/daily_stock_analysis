@@ -200,7 +200,7 @@ To get started quickly, you need at minimum:
 
 ### 5. Done!
 
-Default schedule: Every weekday at **18:00 (Beijing Time)** automatic execution.
+Default schedule: **21:00 Beijing time Monday–Friday** (before the US open) and **05:30 Beijing time Tuesday–Saturday** (after the US close).
 
 ---
 
@@ -786,8 +786,13 @@ Edit `.github/workflows/00-daily-analysis.yml`:
 ```yaml
 schedule:
   # UTC time, Beijing time = UTC + 8
-  - cron: '0 10 * * 1-5'   # Monday to Friday 18:00 (Beijing Time)
+  # Before the US open: Monday–Friday 21:00 Beijing time
+  - cron: '0 13 * * 1-5'
+  # After the US close: Tuesday–Saturday 05:30 Beijing time = Monday–Friday 21:30 UTC
+  - cron: '30 21 * * 1-5'
 ```
+
+The trading-day check uses each market's local date (US: `America/New_York`, Korea: `Asia/Seoul`). It does not use the Beijing calendar date, and it does not apply the China calendar to US symbols or `MARKET_REVIEW_REGION=us`. At 05:30 Beijing on Saturday, New York is still Friday after the close, so a normal US session still runs. Seoul is already Saturday, so Korean symbols are skipped individually; US stocks and the US market review still run.
 
 Common time reference:
 
