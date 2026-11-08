@@ -436,13 +436,14 @@ git push
 
 ### Schedule Details
 
-Default configuration: **Monday to Friday, 18:00 Beijing Time** auto-execution
+Default configuration: **21:00 Beijing time Monday–Friday** (before the US open) and **05:30 Beijing time Tuesday–Saturday** (after the US close). Trading days follow each market's local date, so Saturday 05:30 in Beijing is still Friday in New York and a normal US session is not skipped.
 
 Modify time: Edit cron expression in `.github/workflows/00-daily-analysis.yml`:
 
 ```yaml
 schedule:
-  - cron: '0 10 * * 1-5'  # UTC time, +8 = Beijing time
+  - cron: '0 13 * * 1-5'   # Monday–Friday 13:00 UTC = 21:00 Beijing
+  - cron: '30 21 * * 1-5'  # Monday–Friday 21:30 UTC = 05:30 Beijing the next day
 ```
 
 Common cron examples:

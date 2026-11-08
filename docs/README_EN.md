@@ -152,7 +152,7 @@ Open the `Actions` tab and click `I understand my workflows, go ahead and enable
 
 #### Done
 
-By default, the workflow runs every weekday at 18:00 Beijing time and skips non-trading days. Forced runs, trading-day checks, and resume rules are covered in the [Full Guide](./full-guide_EN.md#scheduled-task-configuration).
+By default the workflow runs twice: **21:00 Beijing time Monday–Friday** (before the US open) and **05:30 Beijing time Tuesday–Saturday** (after the US close). Non-trading days are skipped using each market's local calendar (US uses the New York date, not Beijing Saturday or the China calendar). Forced runs and resume rules are covered in the [Full Guide](./full-guide_EN.md#scheduled-task-configuration).
 
 ### Option 2: Local / Docker Deployment
 
